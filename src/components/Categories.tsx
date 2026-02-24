@@ -100,11 +100,10 @@ export default function Categories() {
             >
                 <div>
                     <h2 className="section-heading" style={{ marginBottom: 12 }}>
-                        Explore our wide variety of categories
+                        Browse by Category
                     </h2>
                     <p className="section-description">
-                        Whether you&apos;re looking for a comedy to make you laugh, a drama to make you think, or a
-                        documentary to learn something new
+                        Find your favorite movies and TV shows by category
                     </p>
                 </div>
                 {/* Carousel navigation */}
@@ -163,13 +162,7 @@ export default function Categories() {
             </div>
 
             {/* Genre cards grid */}
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(5, 1fr)",
-                    gap: 24,
-                }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 {genres.map((genre) => (
                     <GenreCard key={genre.name} genre={genre} />
                 ))}

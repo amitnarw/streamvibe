@@ -92,13 +92,7 @@ export default function Devices() {
             </div>
 
             {/* Device cards grid */}
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, 1fr)",
-                    gap: 24,
-                }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {devices.map((device) => (
                     <div
                         key={device.name}

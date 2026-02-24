@@ -4,7 +4,8 @@ import React, { useState } from "react";
 
 export default function Navbar() {
     const [active, setActive] = useState("Home");
-    const links = ["Home", "Movies & Shows", "Support", "Subscriptions"];
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const links = ["Home", "Browse", "Trending", "My List"];
 
     return (
         <nav
@@ -23,7 +24,7 @@ export default function Navbar() {
                 style={{
                     maxWidth: 1440,
                     margin: "0 auto",
-                    padding: "0 80px",
+                    padding: "0 20px",
                     height: 80,
                     display: "flex",
                     alignItems: "center",
@@ -32,36 +33,16 @@ export default function Navbar() {
             >
                 {/* Logo */}
                 <a href="/" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-                    <div
-                        style={{
-                            width: 42,
-                            height: 42,
-                            background: "#E50000",
-                            borderRadius: 8,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
-                            <path d="M17 8.268a2 2 0 010 3.464l-13.5 7.794A2 2 0 010 17.794V2.206A2 2 0 013.5.474L17 8.268z" fill="#fff" />
-                        </svg>
-                    </div>
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="21" cy="21" r="20" fill="#E50000" opacity="0.9"/>
+                        <path d="M18 14L28 21L18 28V14Z" fill="white"/>
+                        <circle cx="21" cy="21" r="8" fill="white" opacity="0.2"/>
+                    </svg>
                     <span style={{ fontSize: 22, fontWeight: 700, color: "#fff" }}>StreamVibe</span>
                 </a>
 
-                {/* Nav Links */}
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 4,
-                        background: "#0F0F0F",
-                        border: "1px solid #1f1f1f",
-                        borderRadius: 12,
-                        padding: "6px 8px",
-                    }}
-                >
+                {/* Desktop Nav Links */}
+                <div className="hidden md:flex items-center gap-1 bg-[#0F0F0F] border border-[#1f1f1f] rounded-xl p-[6px_8px]">
                     {links.map((link) => (
                         <button
                             key={link}
@@ -116,8 +97,66 @@ export default function Navbar() {
                             <path d="M13.73 21a2 2 0 01-3.46 0" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        className="md:hidden"
+                        style={{
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                            padding: 8,
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        {mobileMenuOpen ? (
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth="2">
+                                <line x1="18" y1="6" x2="6" y2="18" strokeLinecap="round" strokeLinejoin="round" />
+                                <line x1="6" y1="6" x2="18" y2="18" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        ) : (
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth="2">
+                                <line x1="4" y1="6" x2="20" y2="6" strokeLinecap="round" strokeLinejoin="round" />
+                                <line x1="4" y1="12" x2="20" y2="12" strokeLinecap="round" strokeLinejoin="round" />
+                                <line x1="4" y1="18" x2="20" y2="18" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        )}
+                    </button>
                 </div>
             </div>
+
+            {/* Mobile Menu */}
+            {mobileMenuOpen && (
+                <div className="md:hidden bg-[#0F0F0F] border-t border-[#1f1f1f] p-5">
+                    {links.map((link) => (
+                        <button
+                            key={link}
+                            onClick={() => {
+                                setActive(link);
+                                setMobileMenuOpen(false);
+                            }}
+                            style={{
+                                width: "100%",
+                                padding: "15px 20px",
+                                borderRadius: 8,
+                                border: "none",
+                                cursor: "pointer",
+                                fontSize: 15,
+                                fontWeight: 500,
+                                fontFamily: "inherit",
+                                transition: "all 0.2s",
+                                background: active === link ? "#1A1A1A" : "transparent",
+                                color: active === link ? "#fff" : "#999",
+                                textAlign: "left",
+                                marginBottom: 8,
+                            }}
+                        >
+                            {link}
+                        </button>
+                    ))}
+                </div>
+            )}
         </nav>
     );
 }

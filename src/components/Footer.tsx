@@ -66,18 +66,11 @@ export default function Footer() {
                 style={{
                     maxWidth: 1440,
                     margin: "0 auto",
-                    padding: "60px 80px 0",
+                    padding: "60px 20px 0",
                 }}
             >
                 {/* Footer columns */}
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(5, 1fr)",
-                        gap: 40,
-                        marginBottom: 48,
-                    }}
-                >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 mb-12">
                     {footerLinks.map((section) => (
                         <div key={section.title}>
                             <h4
@@ -164,12 +157,14 @@ export default function Footer() {
                         borderTop: "1px solid #1f1f1f",
                         padding: "24px 0",
                         display: "flex",
+                        flexDirection: "column",
                         alignItems: "center",
-                        justifyContent: "space-between",
+                        justifyContent: "center",
+                        gap: 16,
                     }}
                 >
                     <p style={{ fontSize: 14, color: "#666" }}>©2023 streamvibe, All Rights Reserved</p>
-                    <div style={{ display: "flex", gap: 24 }}>
+                    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
                         <a
                             href="#"
                             style={{ fontSize: 14, color: "#666", textDecoration: "none" }}

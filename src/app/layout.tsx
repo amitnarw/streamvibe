@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${manrope.variable} antialiased`}>
+    <html lang="en" className={`${manrope.variable} dark`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>

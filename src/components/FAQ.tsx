@@ -164,8 +164,8 @@ export default function FAQ() {
             </div>
 
             {/* FAQ grid - 2 columns */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-6">
                     {leftCol.map((faq) => (
                         <FAQItem
                             key={faq.id}
@@ -175,7 +175,7 @@ export default function FAQ() {
                         />
                     ))}
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                <div className="flex flex-col gap-6">
                     {rightCol.map((faq) => (
                         <FAQItem
                             key={faq.id}

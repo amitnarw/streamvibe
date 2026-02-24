@@ -95,7 +95,7 @@ export default function Pricing() {
             </div>
 
             {/* Plan cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {plans.map((plan) => (
                     <div
                         key={plan.name}

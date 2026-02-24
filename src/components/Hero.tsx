@@ -100,13 +100,13 @@ export default function Hero() {
                     left: 0,
                     right: 0,
                     textAlign: "center",
-                    padding: "0 80px 60px",
+                    padding: "0 20px 60px",
                     zIndex: 3,
                 }}
             >
                 <h1
                     style={{
-                        fontSize: 48,
+                        fontSize: "clamp(2rem, 5vw, 3rem)",
                         fontWeight: 700,
                         color: "#fff",
                         marginBottom: 14,
@@ -114,21 +114,18 @@ export default function Hero() {
                         letterSpacing: "-0.5px",
                     }}
                 >
-                    The Best Streaming Experience
+                    StreamVibe - Watch Movies & TV Shows
                 </h1>
                 <p
                     style={{
-                        fontSize: 18,
+                        fontSize: "clamp(1rem, 2.5vw, 1.125rem)",
                         color: "#999",
                         lineHeight: 1.65,
                         maxWidth: 860,
                         margin: "0 auto 28px",
                     }}
                 >
-                    StreamVibe is the best streaming experience for watching your favorite movies and shows on
-                    demand, anytime, anywhere. With StreamVibe, you can enjoy a wide variety of content,
-                    including the latest blockbusters, classic movies, popular TV shows, and more. You can also
-                    create your own watchlists, so you can easily find the content you want to watch.
+                    Watch your favorite movies and TV shows on StreamVibe. With thousands of titles to choose from, there's something for everyone.
                 </p>
                 <button
                     className="btn-primary"
