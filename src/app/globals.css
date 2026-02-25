@@ -48,7 +48,7 @@ body {
   align-items: center;
   gap: 6px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-text-primary);
   font-weight: 600;
   font-size: 15px;
   padding: 14px 24px;
@@ -67,8 +67,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: #141414;
-  color: #fff;
+  background: var(--color-background);
+  color: var(--color-text-primary);
   font-weight: 600;
   font-size: 15px;
   padding: 14px 24px;
@@ -87,7 +87,7 @@ body {
 .section-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 80px 80px;
+  padding: 80px 20px;
 }
 
 .section-heading {

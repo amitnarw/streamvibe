@@ -26,57 +26,30 @@ const genres = [
 ];
 
 function GenreCard({ genre }: { genre: (typeof genres)[0] }) {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
         <div
-            style={{
-                background: "#1A1A1A",
-                border: "1px solid #262626",
-                borderRadius: 12,
-                padding: 24,
-                cursor: "pointer",
-                transition: "border-color 0.2s, transform 0.2s",
-            }}
-            onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "#333";
-                e.currentTarget.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "#262626";
-                e.currentTarget.style.transform = "translateY(0)";
-            }}
+            className={`bg-surface border border-border rounded-xl p-6 cursor-pointer transition-all duration-200 ${
+                isHovered ? "border-border-light -translate-y-0.5" : ""
+            }`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             {/* 2x2 poster grid */}
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: 4,
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    marginBottom: 16,
-                }}
-            >
+            <div className="grid grid-cols-2 gap-1 rounded-lg overflow-hidden mb-4">
                 {genre.colors.map((color, i) => (
                     <div
                         key={i}
-                        style={{
-                            aspectRatio: "3/4",
-                            background: `linear-gradient(135deg, ${color}, #000)`,
-                            borderRadius: 4,
-                        }}
+                        className="aspect-[3/4] rounded p-[4px]"
+                        style={{ background: `linear-gradient(135deg, ${color}, #000)` }}
                     />
                 ))}
             </div>
             {/* Label + arrow */}
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                }}
-            >
-                <span style={{ fontSize: 18, fontWeight: 600, color: "#fff" }}>{genre.name}</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2">
+            <div className="flex items-center justify-between">
+                <span className="text-lg font-semibold text-text-primary">{genre.name}</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-text-secondary">
                     <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             </div>
@@ -90,16 +63,9 @@ export default function Categories() {
     return (
         <section className="section-container">
             {/* Header row */}
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "space-between",
-                    marginBottom: 48,
-                }}
-            >
+            <div className="flex items-end justify-between mb-12">
                 <div>
-                    <h2 className="section-heading" style={{ marginBottom: 12 }}>
+                    <h2 className="section-heading mb-3">
                         Browse by Category
                     </h2>
                     <p className="section-description">
@@ -107,54 +73,30 @@ export default function Categories() {
                     </p>
                 </div>
                 {/* Carousel navigation */}
-                <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+                <div className="flex items-center gap-3 flex-shrink-0">
                     <button
                         onClick={() => setPage(Math.max(0, page - 1))}
-                        style={{
-                            width: 44,
-                            height: 44,
-                            borderRadius: 8,
-                            background: "#0F0F0F",
-                            border: "1px solid #262626",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                        }}
+                        className="w-[44px] h-[44px] rounded-lg bg-[#0F0F0F] border border-border flex items-center justify-center cursor-pointer"
                     >
-                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth="2">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-text-primary">
                             <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
-                    <div style={{ display: "flex", gap: 4 }}>
+                    <div className="flex gap-1">
                         {[0, 1, 2, 3].map((i) => (
                             <div
                                 key={i}
-                                style={{
-                                    width: i === page ? 24 : 8,
-                                    height: 4,
-                                    borderRadius: 2,
-                                    background: i === page ? "#E50000" : "#333",
-                                    transition: "all 0.3s",
-                                }}
+                                className={`h-1 rounded transition-all duration-300 ${
+                                    i === page ? "w-6 bg-primary" : "w-2 bg-border-light"
+                                }`}
                             />
                         ))}
                     </div>
                     <button
                         onClick={() => setPage(Math.min(3, page + 1))}
-                        style={{
-                            width: 44,
-                            height: 44,
-                            borderRadius: 8,
-                            background: "#0F0F0F",
-                            border: "1px solid #262626",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                        }}
+                        className="w-[44px] h-[44px] rounded-lg bg-[#0F0F0F] border border-border flex items-center justify-center cursor-pointer"
                     >
-                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth="2">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-text-primary">
                             <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>

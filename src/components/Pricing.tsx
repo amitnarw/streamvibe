@@ -29,17 +29,10 @@ export default function Pricing() {
     return (
         <section className="section-container">
             {/* Header row */}
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "space-between",
-                    marginBottom: 48,
-                }}
-            >
+            <div className="flex items-end justify-between mb-12">
                 <div>
-                    <h2 className="section-heading" style={{ marginBottom: 12 }}>
-                        Choose the plan that&apos;s right for you
+                    <h2 className="section-heading mb-3">
+                        Choose the plan that's right for you
                     </h2>
                     <p className="section-description">
                         Join StreamVibe and select from our flexible subscription options tailored to suit your
@@ -47,47 +40,24 @@ export default function Pricing() {
                     </p>
                 </div>
                 {/* Billing toggle */}
-                <div
-                    style={{
-                        display: "flex",
-                        background: "#0F0F0F",
-                        border: "1px solid #262626",
-                        borderRadius: 8,
-                        padding: 4,
-                        flexShrink: 0,
-                    }}
-                >
+                <div className="flex bg-[#0F0F0F] border border-border rounded-lg p-1 flex-shrink-0">
                     <button
                         onClick={() => setBilling("monthly")}
-                        style={{
-                            padding: "10px 20px",
-                            borderRadius: 6,
-                            border: "none",
-                            fontSize: 15,
-                            fontWeight: 500,
-                            fontFamily: "inherit",
-                            cursor: "pointer",
-                            background: billing === "monthly" ? "#1A1A1A" : "transparent",
-                            color: billing === "monthly" ? "#fff" : "#999",
-                            transition: "all 0.2s",
-                        }}
+                        className={`px-5 py-[10px] rounded-md border-none text-[15px] font-medium font-inherit cursor-pointer transition-all duration-200 ${
+                            billing === "monthly" 
+                                ? "bg-surface text-text-primary" 
+                                : "bg-transparent text-text-secondary hover:text-text-primary"
+                        }`}
                     >
                         Monthly
                     </button>
                     <button
                         onClick={() => setBilling("yearly")}
-                        style={{
-                            padding: "10px 20px",
-                            borderRadius: 6,
-                            border: "none",
-                            fontSize: 15,
-                            fontWeight: 500,
-                            fontFamily: "inherit",
-                            cursor: "pointer",
-                            background: billing === "yearly" ? "#1A1A1A" : "transparent",
-                            color: billing === "yearly" ? "#fff" : "#999",
-                            transition: "all 0.2s",
-                        }}
+                        className={`px-5 py-[10px] rounded-md border-none text-[15px] font-medium font-inherit cursor-pointer transition-all duration-200 ${
+                            billing === "yearly" 
+                                ? "bg-surface text-text-primary" 
+                                : "bg-transparent text-text-secondary hover:text-primary"
+                        }`}
                     >
                         Yearly
                     </button>
@@ -96,49 +66,47 @@ export default function Pricing() {
 
             {/* Plan cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {plans.map((plan) => (
-                    <div
-                        key={plan.name}
-                        style={{
-                            background: "linear-gradient(145deg, #1A1A1A 0%, #141414 100%)",
-                            border: "1px solid #262626",
-                            borderRadius: 12,
-                            padding: 40,
-                            transition: "border-color 0.2s, transform 0.2s",
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = "#333";
-                            e.currentTarget.style.transform = "translateY(-2px)";
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor = "#262626";
-                            e.currentTarget.style.transform = "translateY(0)";
-                        }}
-                    >
-                        <h3 style={{ fontSize: 22, fontWeight: 600, color: "#fff", marginBottom: 12 }}>
-                            {plan.name}
-                        </h3>
-                        <p style={{ fontSize: 16, color: "#999", lineHeight: 1.6, marginBottom: 24 }}>
-                            {plan.description}
-                        </p>
-                        <div style={{ marginBottom: 32 }}>
-                            <span style={{ fontSize: 40, fontWeight: 700, color: "#fff" }}>
-                                ${billing === "yearly" ? (parseFloat(plan.price) * 10).toFixed(2) : plan.price}
-                            </span>
-                            <span style={{ fontSize: 16, color: "#999", marginLeft: 4 }}>
-                                /{billing === "yearly" ? "yr" : "mo"}
-                            </span>
+                {plans.map((plan) => {
+                    const [isHovered, setIsHovered] = useState(false);
+
+                    return (
+                        <div
+                            key={plan.name}
+                            className={`rounded-xl p-10 transition-all duration-200 ${
+                                isHovered ? "border-border-light -translate-y-0.5" : "border-border"
+                            }`}
+                            style={{
+                                background: "linear-gradient(145deg, #1A1A1A 0%, #141414 100%)",
+                                border: "1px solid #262626",
+                            }}
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            <h3 className="text-xl font-semibold text-text-primary mb-3">
+                                {plan.name}
+                            </h3>
+                            <p className="text-base text-text-secondary leading-[1.6] mb-6">
+                                {plan.description}
+                            </p>
+                            <div className="mb-8">
+                                <span className="text-[40px] font-bold text-text-primary">
+                                    ${billing === "yearly" ? (parseFloat(plan.price) * 10).toFixed(2) : plan.price}
+                                </span>
+                                <span className="text-base text-text-secondary ml-1">
+                                    /{billing === "yearly" ? "yr" : "mo"}
+                                </span>
+                            </div>
+                            <div className="flex gap-4">
+                                <button className="btn-outline flex-1">
+                                    Start Free Trial
+                                </button>
+                                <button className="btn-primary flex-1 justify-center">
+                                    Choose Plan
+                                </button>
+                            </div>
                         </div>
-                        <div style={{ display: "flex", gap: 16 }}>
-                            <button className="btn-outline" style={{ flex: 1 }}>
-                                Start Free Trial
-                            </button>
-                            <button className="btn-primary" style={{ flex: 1, justifyContent: "center" }}>
-                                Choose Plan
-                            </button>
-                        </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </section>
     );

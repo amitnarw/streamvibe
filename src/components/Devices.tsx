@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 const devices = [
     {
@@ -8,7 +8,7 @@ const devices = [
         description:
             "StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store.",
         icon: (
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E50000" strokeWidth="1.5">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
                 <line x1="12" y1="18" x2="12.01" y2="18" strokeLinecap="round" />
             </svg>
@@ -19,7 +19,7 @@ const devices = [
         description:
             "StreamVibe is optimized for both Android and iOS tablets. Download our app from the Google Play Store or the Apple App Store.",
         icon: (
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E50000" strokeWidth="1.5">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
                 <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
                 <line x1="12" y1="18" x2="12.01" y2="18" strokeLinecap="round" />
             </svg>
@@ -30,7 +30,7 @@ const devices = [
         description:
             "StreamVibe is optimized for Smart TVs. Download our app from the Google Play Store or the Apple App Store.",
         icon: (
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E50000" strokeWidth="1.5">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
                 <line x1="8" y1="21" x2="16" y2="21" strokeLinecap="round" />
                 <line x1="12" y1="17" x2="12" y2="21" strokeLinecap="round" />
@@ -42,7 +42,7 @@ const devices = [
         description:
             "StreamVibe is optimized for both Windows and macOS laptops. Download our app from the Google Play Store or the Apple App Store.",
         icon: (
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E50000" strokeWidth="1.5">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
                 <path d="M20 16V4a2 2 0 00-2-2H6a2 2 0 00-2 2v12" />
                 <rect x="1" y="16" width="22" height="4" rx="1" />
             </svg>
@@ -53,7 +53,7 @@ const devices = [
         description:
             "StreamVibe is optimized for gaming consoles. Download our app from the Google Play Store or the Apple App Store.",
         icon: (
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E50000" strokeWidth="1.5">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
                 <line x1="6" y1="11" x2="10" y2="11" strokeLinecap="round" />
                 <line x1="8" y1="9" x2="8" y2="13" strokeLinecap="round" />
                 <line x1="15" y1="12" x2="15.01" y2="12" strokeLinecap="round" />
@@ -67,7 +67,7 @@ const devices = [
         description:
             "StreamVibe is optimized for VR headsets. Download our app from the Google Play Store or the Apple App Store.",
         icon: (
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E50000" strokeWidth="1.5">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary">
                 <path d="M2 10a4 4 0 014-4h12a4 4 0 014 4v2a4 4 0 01-4 4h-2.5l-1.5 2-1.5-2H8a4 4 0 01-4-4v-2z" />
                 <circle cx="9" cy="11" r="2" />
                 <circle cx="15" cy="11" r="2" />
@@ -80,8 +80,8 @@ export default function Devices() {
     return (
         <section className="section-container">
             {/* Header */}
-            <div style={{ marginBottom: 48 }}>
-                <h2 className="section-heading" style={{ marginBottom: 12 }}>
+            <div className="mb-12">
+                <h2 className="section-heading mb-3">
                     We Provide you streaming experience across various devices.
                 </h2>
                 <p className="section-description">
@@ -93,47 +93,34 @@ export default function Devices() {
 
             {/* Device cards grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {devices.map((device) => (
-                    <div
-                        key={device.name}
-                        style={{
-                            background: "linear-gradient(145deg, #1A1A1A 0%, #141414 100%)",
-                            border: "1px solid #262626",
-                            borderRadius: 12,
-                            padding: 40,
-                            transition: "border-color 0.2s, transform 0.2s",
-                            cursor: "default",
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = "#333";
-                            e.currentTarget.style.transform = "translateY(-2px)";
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor = "#262626";
-                            e.currentTarget.style.transform = "translateY(0)";
-                        }}
-                    >
+                {devices.map((device) => {
+                    const [isHovered, setIsHovered] = useState(false);
+
+                    return (
                         <div
+                            key={device.name}
+                            className={`rounded-xl p-10 transition-all duration-200 cursor-default ${
+                                isHovered ? "border-border-light -translate-y-0.5" : "border-border"
+                            }`}
                             style={{
-                                width: 56,
-                                height: 56,
-                                borderRadius: 12,
-                                background: "linear-gradient(145deg, #1f1f1f, #141414)",
+                                background: "linear-gradient(145deg, #1A1A1A 0%, #141414 100%)",
                                 border: "1px solid #262626",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginBottom: 20,
                             }}
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
                         >
-                            {device.icon}
+                            <div className="w-[56px] h-[56px] rounded-xl border border-border flex items-center justify-center mb-5" style={{
+                                background: "linear-gradient(145deg, #1f1f1f, #141414)"
+                            }}>
+                                {device.icon}
+                            </div>
+                            <h3 className="text-xl font-semibold text-text-primary mb-2">
+                                {device.name}
+                            </h3>
+                            <p className="text-base text-text-secondary leading-[1.6]">{device.description}</p>
                         </div>
-                        <h3 style={{ fontSize: 22, fontWeight: 600, color: "#fff", marginBottom: 8 }}>
-                            {device.name}
-                        </h3>
-                        <p style={{ fontSize: 16, color: "#999", lineHeight: 1.6 }}>{device.description}</p>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </section>
     );

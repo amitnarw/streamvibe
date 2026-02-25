@@ -63,60 +63,21 @@ function FAQItem({
     onToggle: () => void;
 }) {
     return (
-        <div
-            style={{
-                background: "#1A1A1A",
-                border: "1px solid #262626",
-                borderRadius: 12,
-                overflow: "hidden",
-                transition: "border-color 0.2s",
-            }}
-        >
+        <div className="bg-surface border border-border rounded-xl overflow-hidden transition-colors duration-200 hover:border-border-light">
             <button
                 onClick={onToggle}
-                style={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 16,
-                    padding: "24px 28px",
-                    background: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                    textAlign: "left",
-                    fontFamily: "inherit",
-                }}
+                className="w-full flex items-center gap-4 px-7 py-6 bg-transparent border-none cursor-pointer text-left font-inherit"
             >
-                <span
-                    style={{
-                        fontSize: 18,
-                        fontWeight: 600,
-                        color: "#fff",
-                        minWidth: 36,
-                        flexShrink: 0,
-                    }}
-                >
+                <span className="text-lg font-semibold text-text-primary min-w-[36px] flex-shrink-0">
                     {String(faq.id).padStart(2, "0")}
                 </span>
-                <span style={{ fontSize: 18, fontWeight: 500, color: "#fff", flex: 1 }}>
+                <span className="text-lg font-medium text-text-primary flex-1">
                     {faq.question}
                 </span>
-                <div
-                    style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: 8,
-                        background: "#141414",
-                        border: "1px solid #262626",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                        transition: "transform 0.2s",
-                        transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                    }}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                <div className={`w-[36px] h-[36px] rounded-lg bg-background border border-border flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
+                    isOpen ? "rotate-45" : "rotate-0"
+                }`}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-text-primary">
                         <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
                         <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
                     </svg>
@@ -124,9 +85,9 @@ function FAQItem({
             </button>
             {isOpen && (
                 <>
-                    <div style={{ height: 1, background: "#262626", margin: "0 28px" }} />
-                    <div style={{ padding: "20px 28px 24px" }}>
-                        <p style={{ fontSize: 16, color: "#999", lineHeight: 1.6 }}>{faq.answer}</p>
+                    <div className="h-px bg-border mx-7" />
+                    <div className="px-7 py-5">
+                        <p className="text-base text-text-secondary leading-[1.6]">{faq.answer}</p>
                     </div>
                 </>
             )}
@@ -143,20 +104,13 @@ export default function FAQ() {
     return (
         <section className="section-container">
             {/* Header row */}
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    justifyContent: "space-between",
-                    marginBottom: 48,
-                }}
-            >
-                <div style={{ maxWidth: 600 }}>
-                    <h2 className="section-heading" style={{ marginBottom: 12 }}>
+            <div className="flex items-start justify-between mb-12">
+                <div className="max-w-[600px]">
+                    <h2 className="section-heading mb-3">
                         Frequently Asked Questions
                     </h2>
                     <p className="section-description">
-                        Got questions? We&apos;ve got answers! Check out our FAQ section to find answers to the most
+                        Got questions? We've got answers! Check out our FAQ section to find answers to the most
                         common questions about StreamVibe.
                     </p>
                 </div>
