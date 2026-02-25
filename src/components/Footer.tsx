@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const footerLinks = [
     {
@@ -57,32 +59,25 @@ const socialIcons = [
 export default function Footer() {
     return (
         <footer className="bg-[#0F0F0F] border-t border-surface">
-            <div className="max-w-[1440px] mx-auto px-5 pt-[60px]">
+            <div className="max-w-[1440px] mx-auto px-5 md:px-8 pt-16">
                 {/* Footer columns */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 mb-12">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
                     {footerLinks.map((section) => (
                         <div key={section.title}>
                             <h4 className="text-lg font-semibold text-text-primary mb-5">
                                 {section.title}
                             </h4>
                             <ul className="list-none flex flex-col gap-3">
-                                {section.links.map((link) => {
-                                    const [isHovered, setIsHovered] = useState(false);
-
-                                    return (
-                                        <li key={link}>
-                                            <a
-                                                href="#"
-                                                className="text-base text-text-secondary text-decoration-none transition-colors duration-200"
-                                                style={{ color: isHovered ? "var(--color-text-primary)" : "var(--color-text-secondary)" }}
-                                                onMouseEnter={() => setIsHovered(true)}
-                                                onMouseLeave={() => setIsHovered(false)}
-                                            >
-                                                {link}
-                                            </a>
-                                        </li>
-                                    );
-                                })}
+                                {section.links.map((link) => (
+                                    <li key={link}>
+                                        <a
+                                            href="#"
+                                            className="text-base text-text-secondary text-decoration-none transition-colors duration-200 hover:text-text-primary"
+                                        >
+                                            {link}
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     ))}
@@ -93,30 +88,28 @@ export default function Footer() {
                             Connect With Us
                         </h4>
                         <div className="flex gap-3">
-                            {socialIcons.map((social) => {
-                                const [isHovered, setIsHovered] = useState(false);
-
-                                return (
-                                    <a
-                                        key={social.name}
-                                        href="#"
-                                        className="w-[44px] h-[44px] rounded-lg border border-border flex items-center justify-center transition-colors duration-200"
-                                        style={{ background: isHovered ? "var(--color-border)" : "var(--color-surface)" }}
-                                        onMouseEnter={() => setIsHovered(true)}
-                                        onMouseLeave={() => setIsHovered(false)}
-                                    >
+                            {socialIcons.map((social) => (
+                                <Button
+                                    key={social.name}
+                                    variant="outline"
+                                    size="icon"
+                                    className="w-11 h-11 rounded-lg"
+                                    asChild
+                                >
+                                    <a href="#" aria-label={social.name}>
                                         {social.svg}
                                     </a>
-                                );
-                            })}
+                                </Button>
+                            ))}
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom bar */}
-                <div className="border-t border-surface py-6 flex flex-col items-center justify-center gap-4">
+                <div className="py-6 flex flex-col items-center justify-center gap-4">
                     <p className="text-sm text-text-muted">©2023 streamvibe, All Rights Reserved</p>
-                    <div className="flex gap-4 flex-wrap justify-center">
+                    <Separator className="max-w-md" />
+                    <div className="flex gap-6 flex-wrap justify-center">
                         <a
                             href="#"
                             className="text-sm text-text-muted text-decoration-none transition-colors duration-200 hover:text-text-secondary"
