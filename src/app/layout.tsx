@@ -21,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} dark`}>
-      <body className="antialiased">
-        {children}
-      </body>
+      <body className="antialiased bg-background">{children}</body>
     </html>
   );
 }

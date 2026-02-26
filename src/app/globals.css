@@ -6,13 +6,13 @@
 
 @theme {
   --color-background: #141414;
-  --color-surface: #1A1A1A;
-  --color-surface-light: #1F1F1F;
+  --color-surface: #1a1a1a;
+  --color-surface-light: #1f1f1f;
   --color-border: #262626;
   --color-border-light: #333333;
-  --color-primary: #E50000;
-  --color-primary-hover: #CC0000;
-  --color-text-primary: #FFFFFF;
+  --color-primary: #e50000;
+  --color-primary-hover: #cc0000;
+  --color-text-primary: #ffffff;
   --color-text-secondary: #999999;
   --color-text-muted: #666666;
   --font-sans: var(--font-manrope);
@@ -43,6 +43,20 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--color-border-light);
   border-radius: 3px;
+}
+
+/* Accordion plus/minus toggle */
+[data-state="open"] .accordion-plus {
+  display: none;
+}
+[data-state="open"] .accordion-minus {
+  display: block;
+}
+[data-state="closed"] .accordion-minus {
+  display: none;
+}
+[data-state="closed"] .accordion-plus {
+  display: block;
 }
 
 /* Buttons */
@@ -90,21 +104,33 @@ body {
 .section-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 80px 20px;
+  padding: 60px 20px;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding: 80px 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-container {
+    padding: 80px 80px;
+  }
 }
 
 .section-heading {
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 700;
-  color: var(--color-text-primary);
-  line-height: 1.2;
+  color: #ffffff;
+  line-height: 1.25;
 }
 
 .section-description {
-  font-size: 18px;
-  color: var(--color-text-secondary);
+  font-size: 14px;
+  color: #999999;
   line-height: 1.6;
-  max-width: 960px;
+  max-width: 900px;
 }
 
 @theme inline {
@@ -115,13 +141,11 @@ body {
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);

@@ -3,63 +3,67 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import LogoBig from "./LogoBig";
 
 export default function Hero() {
-    const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-    return (
-        <section className="relative overflow-hidden pt-24 h-screen min-h-[800px] flex flex-col">
-            {/* Movie poster grid background image */}
-            <div className="absolute inset-0 z-0">
-                <Image
-                    src="/hero-bg.png"
-                    alt="Movie poster grid"
-                    fill
-                    className="object-cover object-center-top"
-                    priority
-                />
-            </div>
+  return (
+    <section className="relative overflow-hidden pt-24 h-screen min-h-200 flex flex-col">
+      {/* Movie poster grid background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero.webp"
+          alt="Movie poster grid"
+          fill
+          className="object-cover object-top"
+          priority
+        />
+      </div>
 
-            {/* Gradient overlays for depth */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/60 via-[60%] to-background pointer-events-none z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent via-[15%] to-transparent via-[85%] to-background/60 pointer-events-none z-10" />
+      {/* Gradient overlays for depth — aggressive bottom fade + side vignettes */}
+      <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/50 via-55% to-background pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-linear-to-t from-background via-background/80 via-30% to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-linear-to-r from-background/70 via-transparent via-12% pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-linear-to-l from-background/70 via-transparent via-12% pointer-events-none z-10" />
 
-            {/* Central play icon */}
-            <div
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-background/40 border-2 border-white/20 flex items-center justify-center cursor-pointer backdrop-blur-md z-20 transition-all duration-300 ${
-                    isHovered ? "scale-110 bg-primary/20" : "scale-100"
-                }`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-            >
-                <svg width="36" height="40" viewBox="0 0 18 20" fill="none">
-                    <path
-                        d="M17 8.268a2 2 0 010 3.464l-13.5 7.794A2 2 0 010 17.794V2.206A2 2 0 013.5.474L17 8.268z"
-                        fill="currentColor"
-                        className="text-white"
-                    />
-                </svg>
-            </div>
+      {/* Central big icon */}
+      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-70 pointer-events-none drop-shadow-2xl scale-75 md:scale-95 lg:scale-125">
+        <LogoBig />
+      </div>
 
-            {/* Text content pinned to bottom */}
-            <div className="absolute bottom-0 left-0 right-0 text-center px-8 pb-20 z-30">
-                <h1 className="text-[clamp(2.5rem,6vw,4rem)] font-bold text-text-primary mb-6 leading-tight tracking-tight">
-                    The Best Streaming Experience
-                </h1>
-                <p className="text-[clamp(1rem,2vw,1.25rem)] text-text-secondary leading-relaxed max-w-3xl mx-auto mb-8">
-                    StreamVibe is the best streaming experience for watching your favorite movies and shows on demand, anytime, anywhere.
-                </p>
-                <Button size="xl" className="bg-gradient-to-r from-[#E50000] to-[#B40000] hover:from-[#CC0000] hover:to-[#990000] text-lg px-8 py-4 h-auto">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M8 5.14v13.72a1 1 0 001.5.86l11.5-6.86a1 1 0 000-1.72L9.5 4.28A1 1 0 008 5.14z"
-                            fill="currentColor"
-                            className="text-white"
-                        />
-                    </svg>
-                    Start Watching Now
-                </Button>
-            </div>
-        </section>
-    );
+      {/* Text content pinned to bottom */}
+      <div className="absolute bottom-0 left-0 right-0 text-center px-6 md:px-8 pb-12 md:pb-20 z-30 flex flex-col items-center gap-4">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3 md:mb-5 leading-tight tracking-tight">
+          The Best Streaming Experience
+        </h1>
+        <p className="text-sm sm:text-base md:text-md text-text-secondary leading-relaxed max-w-5xl mx-auto mb-8 md:mb-10">
+          StreamVibe is the best streaming experience for watching your favorite
+          movies and shows on demand, anytime, anywhere. With StreamVibe, you
+          can enjoy a wide variety of content, including the latest
+          blockbusters, classic movies, popular TV shows, and more. You can also
+          create your own watchlists, so you can easily find the content you
+          want to watch.
+        </p>
+        <Button
+          size="xl"
+          className="bg-primary hover:bg-primary-hover text-white text-base font-semibold md:text-lg px-6 md:px-8 py-4 md:py-7 h-auto rounded-lg"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="mr-1"
+          >
+            <path
+              d="M8 5.14v13.72a1 1 0 001.5.86l11.5-6.86a1 1 0 000-1.72L9.5 4.28A1 1 0 008 5.14z"
+              fill="currentColor"
+            />
+          </svg>
+          Start Watching Now
+        </Button>
+      </div>
+    </section>
+  );
 }
