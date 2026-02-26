@@ -100,11 +100,11 @@ export default function Pricing() {
             <CardFooter className="p-0 flex gap-4">
               <Button
                 variant="outline"
-                className="flex-1 border-border bg-background hover:bg-surface text-white"
+                className="flex-1 border-border bg-background hover:bg-surface text-white text-xs sm:text-sm"
               >
                 Start Free Trial
               </Button>
-              <Button className="flex-1 bg-primary hover:bg-primary-hover text-white">
+              <Button className="flex-1 bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm">
                 Choose Plan
               </Button>
             </CardFooter>

@@ -1,20 +1,20 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "./ui/button";
 
 const faqs = [
   {
     id: "1",
     question: "What is StreamVibe?",
     answer:
-      "StreamVibe is a streaming service that allows you to watch movies and shows on demand. You can watch our content on any device, anytime, anywhere.",
+      "StreamVibe is a streaming service that allows you to watch movies and shows on demand.",
   },
   {
     id: "2",
@@ -77,19 +77,19 @@ export default function FAQ() {
             value={faq.id}
             className="border-none rounded-none bg-transparent"
           >
-            <AccordionTrigger className="hover:no-underline py-6">
-              <div className="flex items-center gap-4">
-                <span className="w-[58px] h-[58px] rounded-[10px] bg-surface border border-border flex items-center justify-center text-[20px] font-bold text-white shrink-0">
+            <AccordionTrigger className="hover:no-underline py-6 [&[data-state=open]>div>svg]:rotate-45">
+              <div className="flex items-center gap-4 w-full">
+                <span className="w-[52px] h-[52px] rounded-[10px] bg-[#1A1A1A] flex items-center justify-center text-[18px] font-semibold text-white shrink-0">
                   {faq.id.padStart(2, "0")}
                 </span>
-                <span className="text-[18px] font-medium text-white text-left">
+                <span className="text-[16px] font-medium text-white text-left flex-1">
                   {faq.question}
                 </span>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pb-6">
-              <div className="ml-[74px]">
-                <p className="text-[14px] text-text-secondary leading-[1.6]">
+              <div className="ml-[68px]">
+                <p className="text-[14px] text-[#666666] leading-[1.6]">
                   {faq.answer}
                 </p>
               </div>
@@ -111,25 +111,25 @@ export default function FAQ() {
   );
 
   return (
-    <section className="section-container">
-      {/* Header row */}
-      <div className="flex flex-col lg:flex-row lg:items-start justify-between mb-10 gap-4">
-        <div className="max-w-2xl">
-          <h2 className="section-heading mb-2.5">Frequently Asked Questions</h2>
+    <section className="section-container flex flex-col gap-15">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row gap-5 justify-between">
+        <div className="flex flex-col gap-4">
+          <h2 className="section-heading">Frequently Asked Questions</h2>
           <p className="section-description">
-            Got questions? We&apos;ve got answers! Check out our FAQ section to
-            find answers to the most common questions about StreamVibe.
+            Got questions? We've got answers! Check out our FAQ section to find
+            answers to the most common questions about StreamVibe.
           </p>
         </div>
-        <Button className="bg-primary hover:bg-primary-hover shrink-0 self-start text-[14px] px-5 py-3 h-auto rounded-lg">
+        <Button className="bg-primary hover:bg-primary-hover text-white shrink-0 px-6 shadow-2xl w-auto sm:w-full">
           Ask a Question
         </Button>
       </div>
-
-      {/* FAQ grid - 2 columns */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
-        <div>{renderFaqList(leftCol, "1")}</div>
-        <div>{renderFaqList(rightCol)}</div>
+      {/* FAQ grid - Mobile: single column in order, Desktop: 2 columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+        <div className="md:hidden">{renderFaqList(faqs, "1")}</div>
+        <div className="hidden md:block">{renderFaqList(leftCol, "1")}</div>
+        <div className="hidden md:block">{renderFaqList(rightCol)}</div>
       </div>
     </section>
   );

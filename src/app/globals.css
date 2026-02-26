@@ -6,6 +6,8 @@
 
 @theme {
   --color-background: #141414;
+  --color-dark-background: #0F0F0F;
+  --color-button-background: #1A1A1A;
   --color-surface: #1a1a1a;
   --color-surface-light: #1f1f1f;
   --color-border: #262626;
@@ -45,18 +47,12 @@ body {
   border-radius: 3px;
 }
 
-/* Accordion plus/minus toggle */
-[data-state="open"] .accordion-plus {
-  display: none;
+/* Accordion toggle icon */
+.accordion-toggle::before {
+  content: "+";
 }
-[data-state="open"] .accordion-minus {
-  display: block;
-}
-[data-state="closed"] .accordion-minus {
-  display: none;
-}
-[data-state="closed"] .accordion-plus {
-  display: block;
+[data-state="open"] .accordion-toggle::before {
+  content: "—";
 }
 
 /* Buttons */
@@ -124,6 +120,7 @@ body {
   font-weight: 700;
   color: #ffffff;
   line-height: 1.25;
+  letter-spacing: 1px;
 }
 
 .section-description {

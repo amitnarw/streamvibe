@@ -10,6 +10,8 @@ const config: Config = {
     extend: {
       colors: {
         background: 'var(--color-background)',
+        'dark-background': 'var(--color-dark-background)',
+        'button-background': 'var(--color-button-background)',
         surface: 'var(--color-surface)',
         'surface-light': 'var(--color-surface-light)',
         border: 'var(--color-border)',

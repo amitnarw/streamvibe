@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { LuSearch, LuBell } from "react-icons/lu";
+import Link from "next/link";
 
 export default function Navbar() {
   const [active, setActive] = useState("Home");
@@ -10,31 +12,32 @@ export default function Navbar() {
   const links = ["Home", "Movies & Shows", "Support", "Subscriptions"];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-linear-to-b from-black/90 via-black/50 to-transparent">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-linear-to-b from-background/90 via-background/50 to-transparent">
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center justify-between px-6 lg:px-12 relative py-3">
+      <div className="hidden md:flex items-center justify-between relative !mx-auto py-5 max-w-7xl">
         {/* Logo */}
-        <a
+        <Link
           href="/"
           className="flex items-center shrink-0 z-10 transition-transform hover:scale-105"
         >
           <Image
             src="/logo.svg"
             alt="StreamVibe"
-            width={65}
-            height={65}
+            width={50}
+            height={50}
             priority
           />
-        </a>
+          <span className="text-xl font-bold">StreamVibe</span>
+        </Link>
 
         {/* Nav Links - Centered in a pill container */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-[#0A0A0A] border border-surface-light rounded-full p-1.5 flex items-center gap-1 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-dark-background border-4 border-surface-light rounded-xl p-2 flex items-center gap-1 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
           {links.map((link) => (
             <Button
               key={link}
               variant="ghost"
               onClick={() => setActive(link)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+              className={`px-5 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                 active === link
                   ? "text-white bg-surface"
                   : "text-gray-400 hover:text-white hover:bg-transparent"
@@ -49,41 +52,17 @@ export default function Navbar() {
         <div className="flex items-center gap-4 shrink-0 z-10">
           {/* Search Icon */}
           <button
-            className="text-white hover:text-gray-300 transition-colors cursor-pointer"
+            className="text-white hover:text-gray-300 transition-colors cursor-pointer rounded-full p-2"
             aria-label="Search"
           >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
+            <LuSearch size={28} strokeWidth={1.5} />
           </button>
           {/* Notification Bell Icon */}
           <button
-            className="text-white hover:text-gray-300 transition-colors cursor-pointer"
+            className="text-white hover:text-gray-300 transition-colors cursor-pointer rounded-full p-2"
             aria-label="Notifications"
           >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-              <path d="M13.73 21a2 2 0 01-3.46 0" />
-            </svg>
+            <LuBell size={25} strokeWidth={1.5} />
           </button>
         </div>
       </div>
