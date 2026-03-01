@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const footerLinks = [
   {
@@ -76,11 +77,31 @@ const socialIcons = [
 export default function Footer() {
   return (
     <footer className="bg-dark-background">
-      <div className="section-container mx-auto px-5 md:px-12 pt-16 pb-6 flex flex-col gap-20">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.1 },
+          },
+        }}
+        className="section-container mx-auto px-5 md:px-12 pt-16 pb-6 flex flex-col gap-20"
+      >
         {/* Footer columns */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
           {footerLinks.map((section) => (
-            <div key={section.title}>
+            <motion.div
+              key={section.title}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                },
+              }}
+            >
               <h4 className="text-md font-medium text-white mb-5!">
                 {section.title}
               </h4>
@@ -96,11 +117,21 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
 
           {/* Connect With Us */}
-          <div className="flex flex-col gap-5">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.95 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                transition: { duration: 0.5, ease: "easeOut" },
+              },
+            }}
+            className="flex flex-col gap-5"
+          >
             <h4 className="text-lg font-semibold text-white mb-5">
               Connect With Us
             </h4>
@@ -119,11 +150,20 @@ export default function Footer() {
                 </Button>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom bar - divider + left/right layout */}
-        <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { duration: 0.6, ease: "easeOut" },
+            },
+          }}
+          className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4"
+        >
           <p className="text-sm text-text-muted">
             ©2026 streamvibe, All Rights Reserved
           </p>
@@ -149,8 +189,8 @@ export default function Footer() {
               Cookie Policy
             </a>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </footer>
   );
 }

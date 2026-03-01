@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "./ui/button";
 import SectionHeader from "./SectionHeader";
+import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -73,7 +74,13 @@ export default function FAQ() {
       defaultValue={defaultOpen}
     >
       {items.map((faq, index) => (
-        <div key={faq.id}>
+        <motion.div
+          key={faq.id}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+        >
           <AccordionItem
             value={faq.id}
             className="border-none rounded-none bg-transparent"
@@ -106,7 +113,7 @@ export default function FAQ() {
               }}
             />
           )}
-        </div>
+        </motion.div>
       ))}
     </Accordion>
   );

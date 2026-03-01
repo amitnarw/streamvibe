@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   Carousel,
   CarouselContent,
@@ -119,29 +120,42 @@ export default function Categories() {
       </SectionHeader>
 
       {/* Genre cards carousel */}
-      <Carousel
-        setApi={setApi}
-        opts={{
-          align: "start",
-          slidesToScroll: 1,
-        }}
-        className="w-full"
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <CarouselContent className="-ml-4!">
-          {genres.map((genre, index) => (
-            <CarouselItem
-              key={index}
-              className="pl-4 sm:pl-6 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5! xl:max-w-[20%]!"
-            >
-              <GenreCard genre={genre} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+        <Carousel
+          setApi={setApi}
+          opts={{
+            align: "start",
+            slidesToScroll: 1,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4!">
+            {genres.map((genre, index) => (
+              <CarouselItem
+                key={index}
+                className="pl-4 sm:pl-6 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5! xl:max-w-[20%]!"
+              >
+                <GenreCard genre={genre} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </motion.div>
 
-      <div className="flex sm:hidden items-center justify-between gap-3 bg-dark-background p-2.5 rounded-lg border border-surface-light self-center md:self-auto mx-auto mt-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        className="flex sm:hidden items-center justify-between gap-3 bg-dark-background p-2.5 rounded-lg border border-surface-light self-center md:self-auto mx-auto mt-6"
+      >
         {carouselControls}
-      </div>
+      </motion.div>
     </section>
   );
 }

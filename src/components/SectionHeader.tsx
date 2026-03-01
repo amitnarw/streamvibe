@@ -1,5 +1,7 @@
-import React from "react";
+"use client";
 
+import React from "react";
+import { motion } from "framer-motion";
 interface SectionHeaderProps {
   title: string;
   description: string;
@@ -12,7 +14,13 @@ export default function SectionHeader({
   children,
 }: SectionHeaderProps) {
   return (
-    <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 lg:mb-12 gap-6">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="flex flex-col md:flex-row md:items-end justify-between mb-10 lg:mb-12 gap-6"
+    >
       <div className="flex flex-col gap-3 lg:gap-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight tracking-wide">
           {title}
@@ -22,6 +30,6 @@ export default function SectionHeader({
         </p>
       </div>
       {children && <div className="flex items-center gap-3">{children}</div>}
-    </div>
+    </motion.div>
   );
 }

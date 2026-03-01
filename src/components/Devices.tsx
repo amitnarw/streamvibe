@@ -16,14 +16,15 @@ import {
   MdHeadset,
 } from "react-icons/md";
 import {
+  BsHeadsetVr,
   BsPhoneFill,
   BsFillTabletFill,
   BsTvFill,
   BsLaptopFill,
-  BsHeadsetVr,
 } from "react-icons/bs";
 import { IoGameController } from "react-icons/io5";
 import SectionHeader from "./SectionHeader";
+import { motion } from "framer-motion";
 
 const devices = [
   {
@@ -73,32 +74,55 @@ export default function Devices() {
       />
 
       {/* Device cards grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.1,
+            },
+          },
+        }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+      >
         {devices.map((device) => (
-          <Card
+          <motion.div
             key={device.name}
-            className="relative p-6 lg:p-10 overflow-hidden bg-dark-background border-border rounded-xl flex flex-col gap-5"
+            variants={{
+              hidden: { opacity: 0, scale: 0.95, y: 20 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                transition: { duration: 0.5, ease: "easeOut" },
+              },
+            }}
+            className="flex"
           >
-            {/* Red gradient glow on top right */}
-            <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
+            <Card className="relative p-6 lg:p-10 overflow-hidden bg-dark-background border-border rounded-xl flex flex-col gap-5 w-full">
+              {/* Red gradient glow on top right */}
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
 
-            {/* Icon + Title row */}
-            <div className="relative flex items-center gap-4 mb-6">
-              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg bg-button-background flex items-center justify-center shrink-0">
-                <div className="text-primary">{device.icon}</div>
+              {/* Icon + Title row */}
+              <div className="relative flex items-center gap-4 mb-6">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg bg-button-background flex items-center justify-center shrink-0">
+                  <div className="text-primary">{device.icon}</div>
+                </div>
+                <CardHeader className="p-0">
+                  <CardTitle className="text-lg tracking-[1px] text-white">
+                    {device.name}
+                  </CardTitle>
+                </CardHeader>
               </div>
-              <CardHeader className="p-0">
-                <CardTitle className="text-lg tracking-[1px] text-white">
-                  {device.name}
-                </CardTitle>
-              </CardHeader>
-            </div>
-            <CardDescription className="relative text-sm leading-relaxed text-text-secondary">
-              {device.description}
-            </CardDescription>
-          </Card>
+              <CardDescription className="relative text-sm leading-relaxed text-text-secondary">
+                {device.description}
+              </CardDescription>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

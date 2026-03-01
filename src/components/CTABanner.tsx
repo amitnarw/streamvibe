@@ -2,16 +2,25 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function CTABanner() {
   return (
     <section className="section-container">
-      <div className="relative rounded-xl overflow-hidden border border-border/50">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 40 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="relative rounded-xl overflow-hidden border border-border/50"
+      >
         <Image
           src="/bottom_cta.webp"
           alt="bottom-cta-image"
           fill
           className="absolute inset-0 z-0 object-cover"
+          quality={100}
+          sizes="(max-width: 768px) 100vw, 100vw"
         />
 
         <div className="absolute inset-0 z-10 bg-primary/50"></div>
@@ -31,7 +40,7 @@ export default function CTABanner() {
             Start a Free Trial
           </Button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

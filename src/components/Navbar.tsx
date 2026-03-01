@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LuSearch, LuBell } from "react-icons/lu";
 import Link from "next/link";
 import SegmentedControl from "./SegmentedControl";
+import { motion } from "framer-motion";
 import { RiMenu4Line, RiCloseLine } from "react-icons/ri";
 import {
   Sheet,
@@ -31,7 +32,12 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50"
+    >
       {/* Background layers for smooth gradient transition */}
       <div
         className={`absolute inset-0 pointer-events-none transition-opacity duration-500 bg-linear-to-b from-background via-background/80 to-transparent ${
@@ -169,6 +175,6 @@ export default function Navbar() {
           </Sheet>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

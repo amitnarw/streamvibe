@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import SectionHeader from "./SectionHeader";
 import SegmentedControl from "./SegmentedControl";
+import { motion } from "framer-motion";
 
 const plans = [
   {
@@ -55,59 +56,83 @@ export default function Pricing() {
       </SectionHeader>
 
       {/* Plan cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.15 },
+          },
+        }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {plans.map((plan) => (
-          <Card
+          <motion.div
             key={plan.name}
-            className="p-6 lg:p-10 bg-button-background border border-border/50 rounded-xl hover:border-border-light"
+            variants={{
+              hidden: { opacity: 0, scale: 0.95, y: 30 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                transition: { duration: 0.6, ease: "easeOut" },
+              },
+            }}
+            className="flex"
           >
-            <CardHeader className="p-0 mb-4 lg:mb-5">
-              <CardTitle className="text-lg md:text-xl font-semibold text-white overflow-hidden">
-                <AnimatedText text={plan.name} activeKey={`title-${billing}`} />
-              </CardTitle>
-            </CardHeader>
-            <CardDescription className="text-xs md:text-sm leading-relaxed text-text-secondary mt-4! overflow-hidden">
-              <AnimatedText
-                text={plan.description}
-                activeKey={`desc-${billing}`}
-                delay={0.05}
-              />
-            </CardDescription>
-            <CardContent className="p-0 flex items-baseline my-8!">
-              <span className="flex items-baseline text-2xl md:text-3xl font-semibold text-white leading-none overflow-hidden">
-                $
+            <Card className="p-6 lg:p-10 bg-button-background border border-border/50 rounded-xl hover:border-border-light w-full">
+              <CardHeader className="p-0 mb-4 lg:mb-5">
+                <CardTitle className="text-lg md:text-xl font-semibold text-white overflow-hidden">
+                  <AnimatedText
+                    text={plan.name}
+                    activeKey={`title-${billing}`}
+                  />
+                </CardTitle>
+              </CardHeader>
+              <CardDescription className="text-xs md:text-sm leading-relaxed text-text-secondary mt-4! overflow-hidden">
                 <AnimatedText
-                  text={
-                    billing === "yearly"
-                      ? (parseFloat(plan.price) * 10).toFixed(2)
-                      : plan.price
-                  }
-                  activeKey={`price-${billing}`}
+                  text={plan.description}
+                  activeKey={`desc-${billing}`}
+                  delay={0.05}
                 />
-              </span>
-              <span className="flex items-baseline text-xs md:text-sm text-text-secondary ml-2 font-medium overflow-hidden">
-                /
-                <AnimatedText
-                  text={billing === "yearly" ? "year" : "month"}
-                  activeKey={`period-${billing}`}
-                  yOffset={15}
-                />
-              </span>
-            </CardContent>
-            <CardFooter className="p-0 flex flex-row gap-2 sm:gap-4 overflow-hidden">
-              <Button
-                variant="outline"
-                className="flex-1 h-auto px-0 py-4 sm:py-4 border-border bg-background hover:bg-surface text-white text-xs sm:text-sm font-semibold rounded-lg"
-              >
-                Start Free Trial
-              </Button>
-              <Button className="flex-1 h-auto px-0 py-4 sm:py-4 bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-semibold rounded-lg text-center">
-                Choose Plan
-              </Button>
-            </CardFooter>
-          </Card>
+              </CardDescription>
+              <CardContent className="p-0 flex items-baseline my-8!">
+                <span className="flex items-baseline text-2xl md:text-3xl font-semibold text-white leading-none overflow-hidden">
+                  $
+                  <AnimatedText
+                    text={
+                      billing === "yearly"
+                        ? (parseFloat(plan.price) * 10).toFixed(2)
+                        : plan.price
+                    }
+                    activeKey={`price-${billing}`}
+                  />
+                </span>
+                <span className="flex items-baseline text-xs md:text-sm text-text-secondary ml-2 font-medium overflow-hidden">
+                  /
+                  <AnimatedText
+                    text={billing === "yearly" ? "year" : "month"}
+                    activeKey={`period-${billing}`}
+                    yOffset={15}
+                  />
+                </span>
+              </CardContent>
+              <CardFooter className="p-0 flex flex-row gap-2 sm:gap-4 overflow-hidden">
+                <Button
+                  variant="outline"
+                  className="flex-1 h-auto px-0 py-4 sm:py-4 border-border bg-background hover:bg-surface text-white text-xs sm:text-sm font-semibold rounded-lg"
+                >
+                  Start Free Trial
+                </Button>
+                <Button className="flex-1 h-auto px-0 py-4 sm:py-4 bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-semibold rounded-lg text-center">
+                  Choose Plan
+                </Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
