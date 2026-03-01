@@ -75,13 +75,13 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0F0F0F] border-t border-surface">
-      <div className="max-w-[1440px] mx-auto px-5 md:px-12 pt-16 pb-6">
+    <footer className="bg-dark-background">
+      <div className="section-container mx-auto px-5 md:px-12 pt-16 pb-6 flex flex-col gap-20">
         {/* Footer columns */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h4 className="text-lg font-semibold text-white mb-5">
+              <h4 className="text-md font-medium text-white mb-5!">
                 {section.title}
               </h4>
               <ul className="list-none flex flex-col gap-3">
@@ -100,7 +100,7 @@ export default function Footer() {
           ))}
 
           {/* Connect With Us */}
-          <div>
+          <div className="flex flex-col gap-5">
             <h4 className="text-lg font-semibold text-white mb-5">
               Connect With Us
             </h4>
@@ -123,11 +123,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar - divider + left/right layout */}
-        <div className="border-t border-border pt-6 pb-2 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-text-muted">
-            ©2023 streamvibe, All Rights Reserved
+            ©2026 streamvibe, All Rights Reserved
           </p>
-          <div className="flex gap-5 flex-wrap justify-center">
+          <div className="flex gap-2 sm:gap-5 flex-wrap justify-center">
             <a
               href="#"
               className="text-sm text-text-muted no-underline transition-colors duration-200 hover:text-text-secondary"

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import AnimatedText from "./AnimatedText";
 import {
   Card,
   CardHeader,
@@ -10,6 +11,8 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import SectionHeader from "./SectionHeader";
+import SegmentedControl from "./SegmentedControl";
 
 const plans = [
   {
@@ -36,75 +39,69 @@ export default function Pricing() {
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
   return (
-    <section className="section-container">
-      {/* Header row */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
-        <div>
-          <h2 className="section-heading mb-3">
-            Choose the plan that&apos;s right for you
-          </h2>
-          <p className="section-description">
-            Join StreamVibe and select from our flexible subscription options
-            tailored to suit your viewing preferences. Get ready for non-stop
-            entertainment!
-          </p>
-        </div>
-        {/* Billing toggle */}
-        <div className="flex bg-[#0F0F0F] border border-border rounded-lg p-1 shrink-0">
-          <Button
-            variant={billing === "monthly" ? "secondary" : "ghost"}
-            onClick={() => setBilling("monthly")}
-            className={`px-6 py-2.5 rounded-md text-sm font-medium ${
-              billing === "monthly"
-                ? "bg-surface text-white"
-                : "text-text-secondary"
-            }`}
-          >
-            Monthly
-          </Button>
-          <Button
-            variant={billing === "yearly" ? "secondary" : "ghost"}
-            onClick={() => setBilling("yearly")}
-            className={`px-6 py-2.5 rounded-md text-sm font-medium ${
-              billing === "yearly"
-                ? "bg-surface text-white"
-                : "text-text-secondary"
-            }`}
-          >
-            Yearly
-          </Button>
-        </div>
-      </div>
+    <section className="section-container flex flex-col gap-5 sm:gap-15">
+      <SectionHeader
+        title="Choose the plan that's right for you"
+        description="Join StreamVibe and select from our flexible subscription options tailored to suit your viewing preferences. Get ready for non-stop entertainment!"
+      >
+        <SegmentedControl
+          options={[
+            { label: "Monthly", value: "monthly" },
+            { label: "Yearly", value: "yearly" },
+          ]}
+          value={billing}
+          onChange={(val) => setBilling(val as "monthly" | "yearly")}
+        />
+      </SectionHeader>
 
       {/* Plan cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {plans.map((plan) => (
-          <Card key={plan.name} className="p-7 lg:p-8">
-            <CardHeader className="p-0 mb-3">
-              <CardTitle className="text-xl">{plan.name}</CardTitle>
+          <Card
+            key={plan.name}
+            className="p-6 lg:p-10 bg-button-background border border-border/50 rounded-xl hover:border-border-light"
+          >
+            <CardHeader className="p-0 mb-4 lg:mb-5">
+              <CardTitle className="text-lg md:text-xl font-semibold text-white overflow-hidden">
+                <AnimatedText text={plan.name} activeKey={`title-${billing}`} />
+              </CardTitle>
             </CardHeader>
-            <CardDescription className="text-base leading-relaxed mb-6 text-text-secondary">
-              {plan.description}
+            <CardDescription className="text-xs md:text-sm leading-relaxed text-text-secondary mt-4! overflow-hidden">
+              <AnimatedText
+                text={plan.description}
+                activeKey={`desc-${billing}`}
+                delay={0.05}
+              />
             </CardDescription>
-            <CardContent className="p-0 mb-8">
-              <span className="text-[2.25rem] font-bold text-white">
+            <CardContent className="p-0 flex items-baseline my-8!">
+              <span className="flex items-baseline text-2xl md:text-3xl font-semibold text-white leading-none overflow-hidden">
                 $
-                {billing === "yearly"
-                  ? (parseFloat(plan.price) * 10).toFixed(2)
-                  : plan.price}
+                <AnimatedText
+                  text={
+                    billing === "yearly"
+                      ? (parseFloat(plan.price) * 10).toFixed(2)
+                      : plan.price
+                  }
+                  activeKey={`price-${billing}`}
+                />
               </span>
-              <span className="text-sm text-text-secondary ml-1">
-                /{billing === "yearly" ? "year" : "month"}
+              <span className="flex items-baseline text-xs md:text-sm text-text-secondary ml-2 font-medium overflow-hidden">
+                /
+                <AnimatedText
+                  text={billing === "yearly" ? "year" : "month"}
+                  activeKey={`period-${billing}`}
+                  yOffset={15}
+                />
               </span>
             </CardContent>
-            <CardFooter className="p-0 flex gap-4">
+            <CardFooter className="p-0 flex flex-row gap-2 sm:gap-4 overflow-hidden">
               <Button
                 variant="outline"
-                className="flex-1 border-border bg-background hover:bg-surface text-white text-xs sm:text-sm"
+                className="flex-1 h-auto px-0 py-4 sm:py-4 border-border bg-background hover:bg-surface text-white text-xs sm:text-sm font-semibold rounded-lg"
               >
                 Start Free Trial
               </Button>
-              <Button className="flex-1 bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm">
+              <Button className="flex-1 h-auto px-0 py-4 sm:py-4 bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-semibold rounded-lg text-center">
                 Choose Plan
               </Button>
             </CardFooter>

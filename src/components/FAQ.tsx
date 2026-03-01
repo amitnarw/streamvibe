@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "./ui/button";
+import SectionHeader from "./SectionHeader";
 
 const faqs = [
   {
@@ -77,7 +78,7 @@ export default function FAQ() {
             value={faq.id}
             className="border-none rounded-none bg-transparent"
           >
-            <AccordionTrigger className="hover:no-underline py-6 [&[data-state=open]>div>svg]:rotate-45">
+            <AccordionTrigger className="hover:no-underline py-6">
               <div className="flex items-center gap-4 w-full">
                 <span className="w-[52px] h-[52px] rounded-[10px] bg-[#1A1A1A] flex items-center justify-center text-[18px] font-semibold text-white shrink-0">
                   {faq.id.padStart(2, "0")}
@@ -89,7 +90,7 @@ export default function FAQ() {
             </AccordionTrigger>
             <AccordionContent className="pb-6">
               <div className="ml-[68px]">
-                <p className="text-[14px] text-[#666666] leading-[1.6]">
+                <p className="text-[14px] text-text-muted leading-[1.6]">
                   {faq.answer}
                 </p>
               </div>
@@ -98,7 +99,7 @@ export default function FAQ() {
           {/* Red gradient divider line */}
           {index < items.length - 1 && (
             <div
-              className="h-[1px] w-full"
+              className="h-px w-full"
               style={{
                 background:
                   "linear-gradient(to right, transparent, #E50000 50%, transparent)",
@@ -111,24 +112,19 @@ export default function FAQ() {
   );
 
   return (
-    <section className="section-container flex flex-col gap-15">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row gap-5 justify-between">
-        <div className="flex flex-col gap-4">
-          <h2 className="section-heading">Frequently Asked Questions</h2>
-          <p className="section-description">
-            Got questions? We've got answers! Check out our FAQ section to find
-            answers to the most common questions about StreamVibe.
-          </p>
-        </div>
-        <Button className="bg-primary hover:bg-primary-hover text-white shrink-0 px-6 shadow-2xl w-auto sm:w-full">
+    <section className="section-container flex flex-col gap-5 sm:gap-15">
+      <SectionHeader
+        title="Frequently Asked Questions"
+        description="Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about StreamVibe."
+      >
+        <Button className="bg-primary hover:bg-primary-hover text-white shrink-0 px-6 shadow-2xl w-auto">
           Ask a Question
         </Button>
-      </div>
+      </SectionHeader>
       {/* FAQ grid - Mobile: single column in order, Desktop: 2 columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-        <div className="md:hidden">{renderFaqList(faqs, "1")}</div>
-        <div className="hidden md:block">{renderFaqList(leftCol, "1")}</div>
+        <div className="md:hidden">{renderFaqList(faqs)}</div>
+        <div className="hidden md:block">{renderFaqList(leftCol)}</div>
         <div className="hidden md:block">{renderFaqList(rightCol)}</div>
       </div>
     </section>

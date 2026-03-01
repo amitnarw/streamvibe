@@ -6,8 +6,8 @@
 
 @theme {
   --color-background: #141414;
-  --color-dark-background: #0F0F0F;
-  --color-button-background: #1A1A1A;
+  --color-dark-background: #0f0f0f;
+  --color-button-background: #1a1a1a;
   --color-surface: #1a1a1a;
   --color-surface-light: #1f1f1f;
   --color-border: #262626;
@@ -18,6 +18,18 @@
   --color-text-secondary: #999999;
   --color-text-muted: #666666;
   --font-sans: var(--font-manrope);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
 }
 
 * {
@@ -47,13 +59,7 @@ body {
   border-radius: 3px;
 }
 
-/* Accordion toggle icon */
-.accordion-toggle::before {
-  content: "+";
-}
-[data-state="open"] .accordion-toggle::before {
-  content: "—";
-}
+/* Accordion toggle icon functionality handled by SVG in component */
 
 /* Buttons */
 .btn-primary {
@@ -100,7 +106,7 @@ body {
 .section-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 30px 20px;
 }
 
 @media (min-width: 768px) {
@@ -115,20 +121,6 @@ body {
   }
 }
 
-.section-heading {
-  font-size: 28px;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.25;
-  letter-spacing: 1px;
-}
-
-.section-description {
-  font-size: 14px;
-  color: #999999;
-  line-height: 1.6;
-  max-width: 900px;
-}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

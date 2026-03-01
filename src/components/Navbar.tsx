@@ -1,20 +1,51 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LuSearch, LuBell } from "react-icons/lu";
 import Link from "next/link";
+import SegmentedControl from "./SegmentedControl";
+import { RiMenu4Line, RiCloseLine } from "react-icons/ri";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+  SheetClose,
+} from "@/components/ui/sheet";
 
 export default function Navbar() {
   const [active, setActive] = useState("Home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const links = ["Home", "Movies & Shows", "Support", "Subscriptions"];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-linear-to-b from-background/90 via-background/50 to-transparent">
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      {/* Background layers for smooth gradient transition */}
+      <div
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-500 bg-linear-to-b from-background via-background/80 to-transparent ${
+          isScrolled ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <div
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-500 bg-linear-to-b from-background/90 via-background/50 to-transparent ${
+          isScrolled ? "opacity-0" : "opacity-100"
+        }`}
+      />
+
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center justify-between relative !mx-auto py-5 max-w-7xl">
+      <div className="hidden md:flex items-center justify-between relative mx-auto! py-5 max-w-7xl">
         {/* Logo */}
         <Link
           href="/"
@@ -31,21 +62,12 @@ export default function Navbar() {
         </Link>
 
         {/* Nav Links - Centered in a pill container */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-dark-background border-4 border-surface-light rounded-xl p-2 flex items-center gap-1 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-          {links.map((link) => (
-            <Button
-              key={link}
-              variant="ghost"
-              onClick={() => setActive(link)}
-              className={`px-5 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                active === link
-                  ? "text-white bg-surface"
-                  : "text-gray-400 hover:text-white hover:bg-transparent"
-              }`}
-            >
-              {link}
-            </Button>
-          ))}
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-[0_0_40px_rgba(0,0,0,0.5)] rounded-xl hidden lg:block">
+          <SegmentedControl
+            options={links}
+            value={active}
+            onChange={setActive}
+          />
         </div>
 
         {/* Right Side - Search & Notification Icons */}
@@ -68,7 +90,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden flex items-center justify-between px-6 h-20 bg-black/95 backdrop-blur-xl border-b border-surface-light">
+      <div className="md:hidden flex items-center justify-between relative mx-auto! p-5">
         {/* Logo */}
         <a href="/" className="flex items-center">
           <Image
@@ -81,86 +103,72 @@ export default function Navbar() {
         </a>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
           <button
             className="text-white hover:text-gray-300 transition-colors cursor-pointer"
             aria-label="Search"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
+            <LuSearch size={24} strokeWidth={1.5} />
           </button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="bg-surface border-border-light rounded-xl"
-          >
-            {mobileMenuOpen ? (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2.5"
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="bg-surface border-border-light rounded-xl"
               >
-                <line x1="18" y1="6" x2="6" y2="18" strokeLinecap="round" />
-                <line x1="6" y1="6" x2="18" y2="18" strokeLinecap="round" />
-              </svg>
-            ) : (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2.5"
-              >
-                <line x1="3" y1="7" x2="21" y2="7" strokeLinecap="round" />
-                <line x1="3" y1="12" x2="21" y2="12" strokeLinecap="round" />
-                <line x1="3" y1="17" x2="21" y2="17" strokeLinecap="round" />
-              </svg>
-            )}
-          </Button>
+                {mobileMenuOpen ? (
+                  <RiMenu4Line size={28} strokeWidth={1.5} />
+                ) : (
+                  <RiMenu4Line size={28} />
+                )}
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="top"
+              className="p-4 overflow-y-auto border-b-0 bg-transparent"
+              showCloseButton={false}
+            >
+              <SheetTitle className="sr-only">Menu</SheetTitle>
+
+              {/* Custom Close Button */}
+              <div className="flex justify-end mb-4!">
+                <SheetClose asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-full bg-surface border-border-light text-white hover:text-gray-300"
+                  >
+                    <RiCloseLine size={28} />
+                    <span className="sr-only">Close menu</span>
+                  </Button>
+                </SheetClose>
+              </div>
+
+              <div className="flex flex-col gap-4 mt-4 bg-dark-background p-4 rounded-2xl">
+                {links.map((link) => (
+                  <Button
+                    key={link}
+                    variant={active === link ? "secondary" : "ghost"}
+                    size="lg"
+                    onClick={() => {
+                      setActive(link);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`w-full px-8 py-6 rounded-xl text-lg font-bold justify-start ${
+                      active === link
+                        ? "text-white border-border-light"
+                        : "text-gray-400"
+                    }`}
+                  >
+                    {link}
+                  </Button>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-20 bg-[#0A0A0A] z-50 px-6 py-8 overflow-y-auto">
-          <div className="flex flex-col gap-4">
-            {links.map((link) => (
-              <Button
-                key={link}
-                variant={active === link ? "secondary" : "ghost"}
-                size="lg"
-                onClick={() => {
-                  setActive(link);
-                  setMobileMenuOpen(false);
-                }}
-                className={`w-full px-8 py-6 rounded-3xl text-xl font-bold justify-start ${
-                  active === link
-                    ? "text-white border-border-light"
-                    : "text-gray-400"
-                }`}
-              >
-                {link}
-              </Button>
-            ))}
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
