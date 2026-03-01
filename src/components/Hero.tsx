@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-linear-to-t from-background via-background/80 via-30% to-transparent pointer-events-none z-10" />
 
         {/* Central big icon */}
-        <div className="absolute top-60 sm:top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none drop-shadow-2xl scale-75 md:scale-95 lg:scale-125">
+        <div className="absolute top-6/12 sm:top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none drop-shadow-2xl scale-75 md:scale-95 lg:scale-125">
           <motion.div
             initial={{ opacity: 0, filter: "blur(20px)" }}
             animate={{ opacity: 0.7, filter: "blur(0px)" }}
@@ -43,7 +43,7 @@ export default function Hero() {
       </section>
 
       {/* Text content */}
-      <div className="absolute top-96 sm:top-160 left-1/2 -translate-x-1/2 text-center px-3 md:px-8 pb-12 md:pb-20 z-30 flex flex-col items-center w-full">
+      <div className="absolute top-10/12 sm:top-160 left-1/2 -translate-x-1/2 text-center px-3 md:px-8 pb-12 md:pb-20 z-30 flex flex-col items-center w-full">
         <motion.div
           initial="hidden"
           animate="visible"

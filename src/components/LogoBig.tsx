@@ -1,6 +1,6 @@
 const LogoBig = () => {
   return (
-    <div className="relative w-[250px] h-[250px] md:w-[300px] md:h-[300px]">
+    <div className="relative w-[300px] h-[300px]">
       <svg
         viewBox="0 0 470 470"
         fill="none"
